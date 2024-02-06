@@ -84,10 +84,11 @@ export default function Home() {
     });
   };
 
-  const HandleChangeDescription = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, x:number, i:number) => {
+  const HandleChangeDescription = (e: React.ChangeEvent<HTMLInputElement>, x:number, i:number) => {
     var Question = _.cloneDeep(AllQuestions);
     const { name, value } = e.target;
-    Question[i].Descriptions[x][name] = value;
+    const key: keyof typeof Question[number]["Descriptions"][number] = name;
+    Question[i].Descriptions[x][key] = value;
     Question[i].Descriptions[x].Error = false;
     Question[i].Descriptions[x].ErrorMessage = "";
     SetQuestion(Question);
