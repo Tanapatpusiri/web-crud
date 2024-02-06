@@ -12,9 +12,13 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControl from "@mui/material/FormControl";
 import duplicate from "../image/duplicate.png";
 import Divider from "@mui/material/Divider";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 import _ from "lodash";
 
 export default function Home() {
+  const [showAlert, setShowAlert] = useState(false);
+  const [showErrorAlert, setErrorShowAlert] = useState(false);
   const [AllQuestions, SetQuestion] = useState([
     {
       Question: "",
@@ -40,6 +44,8 @@ export default function Home() {
   const [NameQuestionaire, SetNameQuestionnaire] = useState("");
 
   const HandelCancel = () => {
+    setErrorShowAlert(false);
+    setShowAlert(false);
     SetNameQuestionnaire("");
     SetQuestion([
       {
@@ -149,7 +155,7 @@ export default function Home() {
     SetQuestion(Questions);
   };
 
-  const HandelDelateDes = (x, i) => {
+  const HandelDelateDescription = (x, i) => {
     const Questions = _.cloneDeep(AllQuestions);
     Questions[i].Descriptions.splice(x, 1);
     SetQuestion(Questions);
@@ -164,25 +170,33 @@ export default function Home() {
 
   const HandelFormSave = (e) => {
     e.preventDefault();
-
     var Question = _.cloneDeep(AllQuestions);
     const NewQues = [...Question];
 
     NewQues.map((data) => {
       data.Descriptions.map((Indata) => {
-        console.log(Indata);
-
         if (Indata.DescriptionDetail === "") {
           Indata.Error = true;
-          Indata.Check = false;
-          Indata.ErrorMessage = "Please fill this option";
+          Indata.ErrorMessage = "Please fill in  this option";
           Indata.Text = "";
+          setErrorShowAlert(true);
+          console.log(1);
         } else {
           Indata.Error = false;
+          setShowAlert(true);
+          console.log(3);
         }
       });
     });
     SetQuestion(NewQues);
+  };
+
+  const HandleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
+  const HandleCloseErrorAlert = () => {
+    setErrorShowAlert(false);
   };
 
   return (
@@ -200,7 +214,34 @@ export default function Home() {
         >
           <h3>🦊 Foxbith Questionnaire</h3>
         </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {showAlert && (
+            <Alert
+              severity="success"
+              onClose={HandleCloseAlert}
+              className="Alert"
+            >
+              <AlertTitle>Success</AlertTitle>
+              Thank you for input questions.
+            </Alert>
+          )}
 
+          {showErrorAlert && (
+            <Alert
+              severity="error"
+              onClose={HandleCloseErrorAlert}
+              className="Alert"
+            >
+              <AlertTitle>Error</AlertTitle>
+              Please fill in this option!
+            </Alert>
+          )}
+        </Box>
         <Divider />
         <Box
           sx={{
@@ -349,7 +390,7 @@ export default function Home() {
 
                       <Image
                         onClick={() => {
-                          HandelDelateDes(x, i);
+                          HandelDelateDescription(x, i);
                         }}
                         src={IconBin}
                         priority
