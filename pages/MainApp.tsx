@@ -17,7 +17,6 @@ import AlertTitle from "@mui/material/AlertTitle";
 import _ from "lodash";
 
 export default function Home() {
-  const [showAlert, setShowAlert] = useState(false);
   const [showErrorAlert, setErrorShowAlert] = useState(false);
   const [AllQuestions, SetQuestion] = useState([
     {
@@ -92,7 +91,6 @@ export default function Home() {
     Question[i].Descriptions[x].Error = false;
     Question[i].Descriptions[x].ErrorMessage = "";
     SetQuestion(Question);
-    console.log(AllQuestions);
   };
 
   const DuplicateQuestion = (i: number) => {
@@ -173,18 +171,13 @@ export default function Home() {
     var Question = _.cloneDeep(AllQuestions);
     const NewQues = [...Question];
 
-    NewQues.map((data) => {
-      data.Descriptions.map((Indata) => {
+    NewQues.map((data, a) => {
+      data.Descriptions.map((Indata, x) => {
         if (Indata.DescriptionDetail === "") {
           Indata.Error = true;
           Indata.ErrorMessage = "Please fill in  this option";
           Indata.Text = "";
           setErrorShowAlert(true);
-          console.log(1);
-        } else {
-          Indata.Error = false;
-          setShowAlert(true);
-          console.log(3);
         }
       });
     });
@@ -220,17 +213,6 @@ export default function Home() {
             justifyContent: "center",
           }}
         >
-          {showAlert && (
-            <Alert
-              severity="success"
-              onClose={HandleCloseAlert}
-              className="Alert"
-            >
-              <AlertTitle>Success</AlertTitle>
-              Thank you for input questions.
-            </Alert>
-          )}
-
           {showErrorAlert && (
             <Alert
               severity="error"
