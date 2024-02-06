@@ -88,8 +88,8 @@ export default function Home() {
     const Question = _.cloneDeep(AllQuestions);
     const { name, value } = e.target;
     Question[i].Descriptions[x][name] = value;
-    Question[i].Descriptions[x].Error = false;
-    Question[i].Descriptions[x].ErrorMessage = "";
+    // Question[i].Descriptions[x].Error = false;
+    // Question[i].Descriptions[x].ErrorMessage = "";
     SetQuestion(Question);
   };
 
