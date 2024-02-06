@@ -85,7 +85,7 @@ export default function Home() {
   };
 
   const HandleChangeDescription = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, x:number, i:number) => {
-    var Question = _.cloneDeep(AllQuestions);
+    const Question = _.cloneDeep(AllQuestions);
     const { name, value } = e.target;
     Question[i].Descriptions[x][name] = value;
     Question[i].Descriptions[x].Error = false;
