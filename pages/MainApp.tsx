@@ -131,7 +131,7 @@ export default function Home() {
 
   const HandleChangeQuestion = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, i:number) => {
     const { name, value } = e.target;
-    const Questions = _.cloneDeep(AllQuestions);
+    const Questions = _.cloneDeep(AllQuestions) as any;
     Questions[i][name] = value;
     SetQuestion(Questions);
     console.log(Questions);
