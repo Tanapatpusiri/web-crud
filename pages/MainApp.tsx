@@ -44,7 +44,7 @@ export default function Home() {
 
   const HandelCancel = () => {
     setErrorShowAlert(false);
-    setShowAlert(false);
+    
     SetNameQuestionnaire("");
     SetQuestion([
       {
@@ -184,9 +184,7 @@ export default function Home() {
     SetQuestion(NewQues);
   };
 
-  const HandleCloseAlert = () => {
-    setShowAlert(false);
-  };
+
 
   const HandleCloseErrorAlert = () => {
     setErrorShowAlert(false);
@@ -353,7 +351,7 @@ export default function Home() {
                                   width: {
                                     xs: 190,
                                     sm: 400,
-                                    md: 700,
+                                    md: 800,
                                     lg: 1000,
                                   },
                                 }}
