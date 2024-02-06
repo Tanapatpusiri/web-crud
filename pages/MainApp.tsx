@@ -84,7 +84,7 @@ export default function Home() {
     });
   };
 
-  const HandleChangeDescription = (e, x, i) => {
+  const HandleChangeDescription = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, x:number, i:number) => {
     var Question = _.cloneDeep(AllQuestions);
     const { name, value } = e.target;
     Question[i].Descriptions[x][name] = value;
@@ -129,7 +129,7 @@ export default function Home() {
     console.log(Questions);
   };
 
-  const HandleChangeQuestion = (e, i) => {
+  const HandleChangeQuestion = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, i:number) => {
     const { name, value } = e.target;
     const Questions = _.cloneDeep(AllQuestions);
     Questions[i][name] = value;
@@ -137,10 +137,10 @@ export default function Home() {
     console.log(Questions);
   };
 
-  const onChangeCheck = (e, x, i) => {
+  const onChangeCheck = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, x:number, i:number) => {
     const Questions = _.cloneDeep(AllQuestions);
     const Data = [...Questions];
-    Data[i].Descriptions.map((data, index) => {
+    Data[i].Descriptions.map((data, index:number) => {
       if (x == index) {
         data.Check = true;
         data.Text = "This answer is correct!";
@@ -153,7 +153,7 @@ export default function Home() {
     SetQuestion(Questions);
   };
 
-  const HandelDelateDescription = (x, i) => {
+  const HandelDelateDescription = ( x:number, i:number) => {
     const Questions = _.cloneDeep(AllQuestions);
     Questions[i].Descriptions.splice(x, 1);
     SetQuestion(Questions);
@@ -166,13 +166,13 @@ export default function Home() {
     SetQuestion(DeleteQ);
   };
 
-  const HandelFormSave = (e) => {
-    e.preventDefault();
+  const HandelFormSave = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     var Question = _.cloneDeep(AllQuestions);
     const NewQues = [...Question];
 
     NewQues.map((data, a) => {
-      data.Descriptions.map((Indata, x) => {
+      data.Descriptions.map((Indata, x:number) => {
         if (Indata.DescriptionDetail === "") {
           Indata.Error = true;
           Indata.ErrorMessage = "Please fill in  this option";
